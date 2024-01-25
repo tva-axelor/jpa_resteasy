@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+
 import dao.Car;
 import dao.Customer;
 
@@ -17,18 +18,19 @@ public class CustomerController {
 	private static EntityManagerFactory entityManagerFactory;
    public static void main(String[] args) {
 	   entityManagerFactory=Persistence.createEntityManagerFactory("Taxil");
-	   CustomerController customerController=new CustomerController();
-	   customerController.addCustomer();
+//	   CustomerController customerController=new CustomerController();
+//	   customerController.addCustomer();
 }
-   public void addCustomer() {
+   public void addCustomer(String name,String mobile,String carname,String carmodel) {
+	   entityManagerFactory=Persistence.createEntityManagerFactory("Taxil");
 	   EntityManager entityManager=entityManagerFactory.createEntityManager();
 	   entityManager.getTransaction().begin();
 	  Customer customer=new Customer();
-	  customer.setName("Taxil");
-	  customer.setMobile_No("8238250078");
+	  customer.setName(name);
+	  customer.setMobile_No(mobile);
 	  Car car=new Car();
-	  car.setCar_name("Mercedes");
-	  car.setCar_modelno("S-Class");
+	  car.setCar_name(carname);
+	  car.setCar_modelno(carmodel);
 	  car.setCustomer(customer);
 	  entityManager.persist(car);
 	  customer.setCar(car);
@@ -36,4 +38,36 @@ public class CustomerController {
 	  entityManager.getTransaction().commit();
 	  entityManager.close();
    }
+   
+   public void updateCustomerName(int id,String name) {
+	   entityManagerFactory=Persistence.createEntityManagerFactory("Taxil");
+	   EntityManager entityManager=entityManagerFactory.createEntityManager();
+	   entityManager.getTransaction().begin();
+	   Customer customer=entityManager.find(Customer.class, id);
+	   customer.setName(name);
+	   entityManager.persist(customer);
+	   entityManager.getTransaction().commit();
+	   entityManager.close();
+   }
+   public void updateCustomerMobile(int id,String mobile) {
+	   entityManagerFactory=Persistence.createEntityManagerFactory("Taxil");
+	   EntityManager entityManager=entityManagerFactory.createEntityManager();
+	   entityManager.getTransaction().begin();
+	   Customer customer=entityManager.find(Customer.class, id);
+	   customer.setMobile_No(mobile);
+	   entityManager.persist(customer);
+	   entityManager.getTransaction().commit();
+	   entityManager.close();
+   }
+   
+   public void deleteCustomer(int id) {
+	   entityManagerFactory=Persistence.createEntityManagerFactory("Taxil");
+	   EntityManager entityManager=entityManagerFactory.createEntityManager();
+	   entityManager.getTransaction().begin();
+	   Customer customer=entityManager.find(Customer.class,id);
+	   entityManager.remove(customer);
+	   entityManager.getTransaction().commit();
+	   entityManager.close();
+   }
+  
 }

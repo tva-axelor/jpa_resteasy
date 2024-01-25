@@ -9,9 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "car")
+@XmlRootElement
 public class Car {
 	@Id
 	@GeneratedValue
@@ -19,6 +22,7 @@ public class Car {
 	private String car_name;
 	private String car_modelno;
 	@OneToOne
+	@XmlTransient
 	private Customer customer;
 	public int getCar_id() {
 		return car_id;
@@ -38,6 +42,7 @@ public class Car {
 	public void setCar_modelno(String car_modelno) {
 		this.car_modelno = car_modelno;
 	}
+	@XmlTransient
 	public Customer getCustomer() {
 		return customer;
 	}

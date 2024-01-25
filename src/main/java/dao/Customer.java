@@ -10,9 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "customer")
+@XmlRootElement
 public class Customer {
 	@Id
 	@GeneratedValue
@@ -21,7 +24,7 @@ public class Customer {
 	private String name;
 	private String mobile_No;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Car car;
 
 	public int getId() {
@@ -47,7 +50,7 @@ public class Customer {
 	public void setMobile_No(String mobile_No) {
 		this.mobile_No = mobile_No;
 	}
-
+//	@XmlTransient
 	public Car getCar() {
 		return car;
 	}

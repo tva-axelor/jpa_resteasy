@@ -34,6 +34,8 @@ dependencies {
     
     implementation 'org.jboss.resteasy:resteasy-jaxb-provider:4.7.1.Final'
     
+    implementation 'org.jboss.resteasy:resteasy-servlet-initializer:4.7.1.Final'
+    
     compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
     
     
